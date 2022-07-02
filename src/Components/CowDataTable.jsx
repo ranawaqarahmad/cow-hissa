@@ -1,12 +1,14 @@
+import { Delete as DeleteIcon } from "@mui/icons-material";
 import {
+  IconButton,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
-  TableRow, 
+  TableRow,
 } from "@mui/material";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs , doc , deleteDoc  } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { db } from "../utils/firebase";
 
@@ -30,7 +32,7 @@ const CowDataTable = () => {
     getCow();
     getData();
   }, [dataArray]);
- 
+
   return (
     <>
       <h1>Cow Data Table</h1>
@@ -41,11 +43,14 @@ const CowDataTable = () => {
               <TableCell>Serial No</TableCell>
               <TableCell>Cow Price</TableCell>
               <TableCell>Cow Weight</TableCell>
-              <TableCell>Purchased Date</TableCell>
+              <TableCell>Extra Expenses</TableCell>
+              <TableCell>Weight Per Person</TableCell>
+              <TableCell>Purchased DateX</TableCell>
+              <TableCell></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {dataArray.map((data , idx) => {
+            {dataArray.map((data, idx) => {
               return (
                 <TableRow
                   key={data.id}
@@ -54,8 +59,14 @@ const CowDataTable = () => {
                   <TableCell> {idx + 1} </TableCell>
                   <TableCell> RS {data.cowPrice} </TableCell>
                   <TableCell> {data.cowWeight} KG </TableCell>
-
+                  <TableCell> RS {data.extraExpense} </TableCell>
+                  <TableCell> {data.weightPerPerson} KG </TableCell>
                   <TableCell> {data.purchasedDate} </TableCell>
+                  <TableCell> <IconButton onClick={ async () => {
+                    await deleteDoc(doc(db , 'cows' , data.id))
+                  }} >
+                      <DeleteIcon sx={{color: 'red'}} />
+                    </IconButton> </TableCell>
                 </TableRow>
               );
             })}

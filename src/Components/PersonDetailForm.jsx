@@ -26,7 +26,6 @@ const PersonDetailForm = () => {
   const navigate = useNavigate();
   const [cows, setCows] = useState([]);
   const [select, setSelect] = useState("");
-  const [hissaSelect , setHissaSelect] = useState('');
   const personsCollectionRef = collection(db, "persons");
   const cowsCollectionRef = collection(db, "cows");
   const [cow, setCow] = useState("");
@@ -36,7 +35,7 @@ const PersonDetailForm = () => {
     cowNumber: "",
     advancePaid: "",
     remainingPayment: "",
-    noOfHissa: ""
+    noOfHissa: "1"
   });
 
   const handleChange = (e, key) => {
@@ -75,7 +74,7 @@ const PersonDetailForm = () => {
   };
 
   const getCow = async () => {
-    console.log("working", form.cowNumber);
+  
     const cowDoc = doc(db, "cows", form.cowNumber);
     const cowDetail = await getDoc(cowDoc);
     setCow(cowDetail.data());
@@ -90,7 +89,7 @@ const PersonDetailForm = () => {
     getCows();
   }, [form.cowNumber]);
 
-  console.log(cow);
+  
   return (
     <>
       <h1>Person Detail Form</h1>
@@ -105,7 +104,7 @@ const PersonDetailForm = () => {
                 textAlign: "left",
               }}
             >
-              Person Name
+              نام
             </InputLabel>
             <TextField
               variant="outlined"
@@ -124,7 +123,7 @@ const PersonDetailForm = () => {
                 textAlign: "left",
               }}
             >
-              Phone Number
+              فون نمبر
             </InputLabel>
             <TextField
               variant="outlined"
@@ -143,7 +142,7 @@ const PersonDetailForm = () => {
                 textAlign: "left",
               }}
             >
-              Select Cow
+              گائے نمبر
             </InputLabel>
             <Select
               value={form.cowNumber}
@@ -228,7 +227,7 @@ const PersonDetailForm = () => {
                 textAlign: "left",
               }}
             >
-              Advance Paid
+              ایڈوانس فی کس
             </InputLabel>
             <TextField
               variant="outlined"
@@ -247,12 +246,12 @@ const PersonDetailForm = () => {
                 textAlign: "left",
               }}
             >
-              Remaining Payment
+              بقایا جات واجب الاداء
             </InputLabel>
             <TextField
               variant="outlined"
               type="number"
-              value={Math.floor(17000 - form.advancePaid)}
+              value={Math.floor(17000 * form.noOfHissa - form.advancePaid + parseInt(cow.extraExpense / 7))}
               disabled
               fullWidth
             />
@@ -266,9 +265,9 @@ const PersonDetailForm = () => {
                 textAlign: "left",
               }}
             >
-              No of Hissa's
+              حصہ
             </InputLabel>
-            <Select value={form.noOfHissa} onChange={(e) => handleChange(e , 'noOfHissa')}fullWidth >
+            <Select value={form.noOfHissa} onChange={(e) => handleChange(e , 'noOfHissa')} fullWidth >
                 <MenuItem value={1}> 1 </MenuItem>
                 <MenuItem value={2}> 2 </MenuItem>
                 <MenuItem value={3}> 3 </MenuItem>
@@ -277,6 +276,24 @@ const PersonDetailForm = () => {
                 <MenuItem value={6}> 6 </MenuItem>
                 <MenuItem value={7}> 7 </MenuItem>
             </Select>
+          </Grid>
+          <Grid item md={4}>
+            <InputLabel sx={{fontSize:'20px' , fontWeight: "600" , margin: '10px 0' , textAlign: "left" }}>
+            معرفت
+            </InputLabel>
+            <TextField variant="outlined" type="text" onChange={(e) => handleChange(e , 'refPersonName')} value={form.refPersonName} fullWidth />
+          </Grid>
+          <Grid item md={4}>
+            <InputLabel sx={{fontSize: "20px" , fontWeight: "600" , margin: "10px 0" , textAlign: 'left'}}>
+            فون نمبر
+            </InputLabel>
+            <TextField variant="outlined" type="number" onChange={(e) => handleChange(e, 'refPhoneNo')} value={form.refPhoneNo} fullWidth /> 
+          </Grid>
+          <Grid item md={4}>
+            <InputLabel sx={{fontSize: "20px" , fontWeight: "600" , margin: "10px 0" , textAlign: 'left'}}>
+            اضافی اخراجات فی کس
+            </InputLabel>
+            <TextField variant="outlined" value={Math.floor(parseInt(cow.extraExpense / 7))} disabled fullWidth />
           </Grid>
         </Grid>
 

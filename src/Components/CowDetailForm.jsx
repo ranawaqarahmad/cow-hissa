@@ -1,4 +1,4 @@
-import { TextField, Button, Grid, Box , InputLabel} from "@mui/material";
+import { TextField, Button, Grid, Box, InputLabel } from "@mui/material";
 import { useState, useEffect } from "react";
 import { db } from "../utils/firebase";
 import { addDoc, collection, doc, getDoc } from "firebase/firestore";
@@ -6,42 +6,47 @@ import CowDataTable from "./CowDataTable";
 import { useParams } from "react-router-dom";
 
 const CowDetailForm = () => {
-  // const [personName, setPersonName] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [dataArray, setDataArray] = useState([]);
-
   const [form, setForm] = useState({
     cowPrice: "",
     cowWeight: "",
+    cowName: "",
+    cowNumber: "",
+    extraExpense: "",
+    weightPerPerson: "",
+    totalExpense: "",
     hissaCost: 17000,
     purchasedDate: "",
-    persons: []
+    persons: [],
   });
 
   const usersCollectionRef = collection(db, "cows");
-  const personsCollectionRef = collection(db, "persons");
 
   const createData = async () => {
-    setLoading(true);
+   
 
     await addDoc(usersCollectionRef, {
       cowPrice: form.cowPrice,
       cowWeight: form.cowWeight,
+      cowName: form.cowName,
+      cowNumber: form.cowNumber,
+      extraExpense: form.extraExpense,
+      weightPerPerson: Math.floor(form.cowWeight / 7),
+      totalExpense: Math.floor(form.cowPrice + form.extraExpense),
       hissaCost: 17000,
       purchasedDate: form.purchasedDate,
-      persons: []
+      persons: [],
     });
-
-    // await addDoc(personsCollectionRef , {
-
-    // })
 
     setForm({
       cowPrice: "",
       cowWeight: "",
       purchasedDate: "",
+      cowName: "",
+      cowNumber: "",
+      extraExpence: "",
+      weightPerPerson: "",
+    totalExpense: "",
     });
-    
   };
 
   const handleChange = (e, key) => {
@@ -57,24 +62,13 @@ const CowDetailForm = () => {
 
   let { cowId } = useParams();
 
-  const [singleCow, setSingleCow] = useState("");
-
-  useEffect(() => {
-    // const getCow = async () => {
-    //   const cowDoc = doc(db, "cows", cowId);
-    //   const cowDetail = await getDoc(cowDoc);
-    //   setSingleCow(cowDetail.data());
-    // };
-    // getCow();
-  }, []);
-  // console.log(singleCow.cowPrice);
   return (
     <>
       <h1>Cow Detail {cowId} </h1>
       <Grid container spacing={3}>
         <Grid container item spacing={3}>
           <Grid item md={4}>
-          <InputLabel
+            <InputLabel
               sx={{
                 fontSize: "20px",
                 fontWeight: "600",
@@ -82,7 +76,7 @@ const CowDetailForm = () => {
                 textAlign: "left",
               }}
             >
-              Cow Price
+              قیمت گائے
             </InputLabel>
             <TextField
               variant="outlined"
@@ -93,7 +87,7 @@ const CowDetailForm = () => {
             />
           </Grid>
           <Grid item md={4}>
-          <InputLabel
+            <InputLabel
               sx={{
                 fontSize: "20px",
                 fontWeight: "600",
@@ -101,7 +95,7 @@ const CowDetailForm = () => {
                 textAlign: "left",
               }}
             >
-            Cow Weight
+              گائے کا کل وزن
             </InputLabel>
             <TextField
               variant="outlined"
@@ -112,7 +106,7 @@ const CowDetailForm = () => {
             />
           </Grid>
           <Grid item md={4}>
-          <InputLabel
+            <InputLabel
               sx={{
                 fontSize: "20px",
                 fontWeight: "600",
@@ -120,7 +114,7 @@ const CowDetailForm = () => {
                 textAlign: "left",
               }}
             >
-            Purchased Date
+              تاریخ
             </InputLabel>
             <TextField
               variant="outlined"
@@ -129,6 +123,75 @@ const CowDetailForm = () => {
               value={form.purchasedDate}
               fullWidth
             />
+          </Grid>
+          <Grid item md={4}>
+            <InputLabel
+              sx={{
+                fontSize: "20px",
+                fontWeight: "600",
+                margin: "10px 0",
+                textAlign: "left",
+              }}
+            >
+              نام گائے
+            </InputLabel>
+            <TextField
+              variant="outlined"
+              type="text"
+              onChange={(e) => handleChange(e, "cowName")}
+              value={form.cowName}
+              fullWidth
+            />
+          </Grid>
+          <Grid item md={4}>
+            <InputLabel
+              sx={{
+                fontSize: "20px",
+                fontWeight: "600",
+                margin: "10px 0",
+                textAlign: "left",
+              }}
+            >
+              گائے نمبر
+            </InputLabel>
+            <TextField
+              variant="outlined"
+              type="number"
+              onChange={(e) => handleChange(e, "cowNumber")}
+              value={form.cowNumber}
+              fullWidth
+            />
+          </Grid>
+          <Grid item md={4}>
+            <InputLabel
+              sx={{
+                fontSize: "20px",
+                fontWeight: "600",
+                margin: "10px 0",
+                textAlign: "left",
+              }}
+            >
+             اضافی اخراجات 
+            </InputLabel>
+            <TextField
+              variant="outlined"
+              type="number"
+              onChange={(e) => handleChange(e, "extraExpense")}
+              value={form.extraExpense}
+              fullWidth
+            />
+          </Grid>
+          <Grid item md={4}>
+            <InputLabel sx={{fontSize: "20px", fontWeight: "600" , margin:"10px 0" , textAlign: "left"}}>
+            وزن فی کس
+            </InputLabel>
+            <TextField variant="outlined" type="number" value={Math.floor(form.cowWeight / 7)} disabled fullWidth />
+          </Grid>
+          <Grid item md={4}>
+            <InputLabel sx={{fontSize: "20px" , fontWeight: "600" , margin: "10px 0" , textAlign: "left"}}>
+            کل خرچہ
+              </InputLabel>
+              <TextField variant="outlined" type="number" value={Math.floor(parseInt(form.cowPrice) + parseInt(form.extraExpense))} disabled fullWidth />
           </Grid>
         </Grid>
 
