@@ -8,7 +8,7 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { collection, getDocs , doc , deleteDoc  } from "firebase/firestore";
+import { collection, getDocs, doc, deleteDoc } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { db } from "../utils/firebase";
 
@@ -35,7 +35,7 @@ const CowDataTable = () => {
 
   return (
     <>
-      <h1>Cow Data Table</h1>
+      <h1>تفصیلات گائے</h1>
       <TableContainer>
         <Table>
           <TableHead>
@@ -62,11 +62,16 @@ const CowDataTable = () => {
                   <TableCell> RS {data.extraExpense} </TableCell>
                   <TableCell> {data.weightPerPerson} KG </TableCell>
                   <TableCell> {data.purchasedDate} </TableCell>
-                  <TableCell> <IconButton onClick={ async () => {
-                    await deleteDoc(doc(db , 'cows' , data.id))
-                  }} >
-                      <DeleteIcon sx={{color: 'red'}} />
-                    </IconButton> </TableCell>
+                  <TableCell>
+                    {" "}
+                    <IconButton
+                      onClick={async () => {
+                        await deleteDoc(doc(db, "cows", data.id));
+                      }}
+                    >
+                      <DeleteIcon sx={{ color: "red" }} />
+                    </IconButton>{" "}
+                  </TableCell>
                 </TableRow>
               );
             })}

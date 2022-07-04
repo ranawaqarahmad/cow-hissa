@@ -31,7 +31,7 @@ const PersonDataTable = () => {
 
   return (
     <>
-      <h1>Persons Data Table</h1>
+      <h1>تفصیلات فی کس</h1>
       <TableContainer>
         <Table>
           <TableHead>
