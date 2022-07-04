@@ -35,7 +35,7 @@ const CowDataTable = () => {
 
   return (
     <>
-      <h1>تفصیلات گائے</h1>
+      {/* <h1>تفصیلات گائے</h1> */}
       <TableContainer>
         <Table>
           <TableHead>

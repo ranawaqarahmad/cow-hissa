@@ -6,7 +6,7 @@ import {
   MenuItem,
   InputLabel,
   FormControl,
-  Box
+  Box,
 } from "@mui/material";
 import { useState, useEffect } from "react";
 import { db } from "../utils/firebase";
@@ -35,7 +35,7 @@ const PersonDetailForm = () => {
     cowNumber: "",
     advancePaid: "",
     remainingPayment: "",
-    noOfHissa: "1"
+    noOfHissa: "1",
   });
 
   const handleChange = (e, key) => {
@@ -53,7 +53,7 @@ const PersonDetailForm = () => {
       cowNumber: form.cowNumber,
       advancePaid: form.advancePaid,
       remainingPayment: Math.floor(17000 - form.advancePaid),
-      noOfHissa: form.noOfHissa
+      noOfHissa: form.noOfHissa,
     });
 
     const cowDoc = doc(db, "cows", form.cowNumber);
@@ -69,12 +69,11 @@ const PersonDetailForm = () => {
       cowNumber: "",
       advancePaid: "",
       remainingPayment: "",
-      noOfHissa: ""
+      noOfHissa: "",
     });
   };
 
   const getCow = async () => {
-  
     const cowDoc = doc(db, "cows", form.cowNumber);
     const cowDetail = await getDoc(cowDoc);
     setCow(cowDetail.data());
@@ -89,10 +88,9 @@ const PersonDetailForm = () => {
     getCows();
   }, [form.cowNumber]);
 
-  
   return (
     <>
-      <h1>Person Detail Form</h1>
+      <h1>تفصیلات فی کس</h1>
       <Grid container spacing={3}>
         <Grid container item spacing={3}>
           <Grid item md={4}>
@@ -150,8 +148,6 @@ const PersonDetailForm = () => {
               fullWidth
             >
               {cows.map((cow, idx) => {
-               
-
                 return (
                   <MenuItem value={cow.id} key={cow.id}>
                     {" "}
@@ -251,7 +247,11 @@ const PersonDetailForm = () => {
             <TextField
               variant="outlined"
               type="number"
-              value={Math.floor(17000 * form.noOfHissa - form.advancePaid + parseInt(cow.extraExpense / 7))}
+              value={Math.floor(
+                17000 * form.noOfHissa -
+                  form.advancePaid +
+                  parseInt(cow.extraExpense / 7)
+              )}
               disabled
               fullWidth
             />
@@ -267,33 +267,75 @@ const PersonDetailForm = () => {
             >
               حصہ
             </InputLabel>
-            <Select value={form.noOfHissa} onChange={(e) => handleChange(e , 'noOfHissa')} fullWidth >
-                <MenuItem value={1}> 1 </MenuItem>
-                <MenuItem value={2}> 2 </MenuItem>
-                <MenuItem value={3}> 3 </MenuItem>
-                <MenuItem value={4}> 4 </MenuItem>
-                <MenuItem value={5}> 5 </MenuItem>
-                <MenuItem value={6}> 6 </MenuItem>
-                <MenuItem value={7}> 7 </MenuItem>
+            <Select
+              value={form.noOfHissa}
+              onChange={(e) => handleChange(e, "noOfHissa")}
+              fullWidth
+            >
+              <MenuItem value={1}> 1 </MenuItem>
+              <MenuItem value={2}> 2 </MenuItem>
+              <MenuItem value={3}> 3 </MenuItem>
+              <MenuItem value={4}> 4 </MenuItem>
+              <MenuItem value={5}> 5 </MenuItem>
+              <MenuItem value={6}> 6 </MenuItem>
+              <MenuItem value={7}> 7 </MenuItem>
             </Select>
           </Grid>
           <Grid item md={4}>
-            <InputLabel sx={{fontSize:'20px' , fontWeight: "600" , margin: '10px 0' , textAlign: "left" }}>
-            معرفت
+            <InputLabel
+              sx={{
+                fontSize: "20px",
+                fontWeight: "600",
+                margin: "10px 0",
+                textAlign: "left",
+              }}
+            >
+              معرفت
             </InputLabel>
-            <TextField variant="outlined" type="text" onChange={(e) => handleChange(e , 'refPersonName')} value={form.refPersonName} fullWidth />
+            <TextField
+              variant="outlined"
+              type="text"
+              onChange={(e) => handleChange(e, "refPersonName")}
+              value={form.refPersonName}
+              fullWidth
+            />
           </Grid>
           <Grid item md={4}>
-            <InputLabel sx={{fontSize: "20px" , fontWeight: "600" , margin: "10px 0" , textAlign: 'left'}}>
-            فون نمبر
+            <InputLabel
+              sx={{
+                fontSize: "20px",
+                fontWeight: "600",
+                margin: "10px 0",
+                textAlign: "left",
+              }}
+            >
+              فون نمبر
             </InputLabel>
-            <TextField variant="outlined" type="number" onChange={(e) => handleChange(e, 'refPhoneNo')} value={form.refPhoneNo} fullWidth /> 
+            <TextField
+              variant="outlined"
+              type="number"
+              onChange={(e) => handleChange(e, "refPhoneNo")}
+              value={form.refPhoneNo}
+              fullWidth
+            />
           </Grid>
           <Grid item md={4}>
-            <InputLabel sx={{fontSize: "20px" , fontWeight: "600" , margin: "10px 0" , textAlign: 'left'}}>
-            اضافی اخراجات فی کس
+            <InputLabel
+              sx={{
+                fontSize: "20px",
+                fontWeight: "600",
+                margin: "10px 0",
+                textAlign: "left",
+              }}
+            >
+              اضافی اخراجات فی کس
             </InputLabel>
-            <TextField variant="outlined" value={Math.floor(parseInt(cow.extraExpense / 7))} disabled fullWidth />
+            <TextField
+              variant="outlined"
+              value={Math.floor(parseInt(cow.extraExpense / 7))}
+              disabled
+              fullWidth
+            />
           </Grid>
         </Grid>
 
@@ -306,7 +348,7 @@ const PersonDetailForm = () => {
           </Grid>
         </Grid>
       </Grid>
-      <Box sx={{margin: '50px 0'}}>
+      <Box sx={{ margin: "50px 0" }}>
         <PersonDataTable />
       </Box>
     </>

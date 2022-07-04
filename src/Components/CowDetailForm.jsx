@@ -64,7 +64,7 @@ const CowDetailForm = () => {
 
   return (
     <>
-      <h1>Cow Detail {cowId} </h1>
+      <h1>تفصیلات گائے</h1>
       <Grid container spacing={3}>
         <Grid container item spacing={3}>
           <Grid item md={4}>
