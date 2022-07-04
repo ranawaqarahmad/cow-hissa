@@ -204,7 +204,7 @@ const CowDetailForm = () => {
         </Grid>
       </Grid>
 
-      <Box>
+      <Box sx={{margin:"50px 0"}}>
         <CowDataTable />
       </Box>
     </>
