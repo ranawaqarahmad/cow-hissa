@@ -156,7 +156,7 @@ const PersonDetailForm = () => {
                 return (
                   <MenuItem value={cow.id} key={cow.id}>
                     {" "}
-                    {cow.id}  ( {cow.cowNumber} )
+                      ( {cow.cowNumber} )
                   </MenuItem>
                 );
               })}
