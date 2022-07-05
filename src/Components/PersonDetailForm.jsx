@@ -52,7 +52,10 @@ const PersonDetailForm = () => {
       phoneNumber: form.phoneNumber,
       cowNumber: form.cowNumber,
       advancePaid: form.advancePaid,
-      remainingPayment: Math.floor(17000 - form.advancePaid),
+      remainingPayment: Math.floor(
+        17000 * form.noOfHissa -
+          form.advancePaid +
+          (cow.extraExpense / 7)),
       noOfHissa: form.noOfHissa,
     });
 
@@ -62,6 +65,8 @@ const PersonDetailForm = () => {
     });
 
     // navigate(`/cowDetails/${form.cowNumber}`)
+
+    console.log({form})
 
     setForm({
       personName: "",
@@ -151,32 +156,13 @@ const PersonDetailForm = () => {
                 return (
                   <MenuItem value={cow.id} key={cow.id}>
                     {" "}
-                    {cow.id} ( Cow {idx + 1} )
+                    {cow.id}  ( {cow.cowNumber} )
                   </MenuItem>
                 );
               })}
             </Select>
           </Grid>
 
-          {/* <Grid item md={4}>
-            <InputLabel
-              sx={{
-                fontSize: "20px",
-                fontWeight: "600",
-                margin: "10px 0",
-                textAlign: "left",
-              }}
-            >
-              Cow Price
-            </InputLabel>
-            <TextField
-              variant="outlined"
-              type="number"
-              value={cow.cowPrice}
-              disabled
-              fullWidth
-            />
-          </Grid>
           <Grid item md={4}>
             <InputLabel
               sx={{
@@ -186,44 +172,7 @@ const PersonDetailForm = () => {
                 textAlign: "left",
               }}
             >
-              Cow Weight
-            </InputLabel>
-            <TextField
-              variant="outlined"
-              type="number"
-              value={cow.cowWeight}
-              disabled
-              fullWidth
-            />
-          </Grid>
-          <Grid item md={4}>
-            <InputLabel
-              sx={{
-                fontSize: "20px",
-                fontWeight: "600",
-                margin: "10px 0",
-                textAlign: "left",
-              }}
-            >
-              Purchased Date
-            </InputLabel>
-            <TextField
-              variant="outlined"
-              value={cow.purchasedDate}
-              disabled
-              fullWidth
-            />
-          </Grid> */}
-          <Grid item md={4}>
-            <InputLabel
-              sx={{
-                fontSize: "20px",
-                fontWeight: "600",
-                margin: "10px 0",
-                textAlign: "left",
-              }}
-            >
-              ایڈوانس فی کس
+              بقايا جات واجب الوصول
             </InputLabel>
             <TextField
               variant="outlined"
@@ -250,7 +199,7 @@ const PersonDetailForm = () => {
               value={Math.floor(
                 17000 * form.noOfHissa -
                   form.advancePaid +
-                  parseInt(cow.extraExpense / 7)
+                  (cow.extraExpense / 7)
               )}
               disabled
               fullWidth
@@ -332,7 +281,8 @@ const PersonDetailForm = () => {
             </InputLabel>
             <TextField
               variant="outlined"
-              value={Math.floor(parseInt(cow.extraExpense / 7))}
+              type="number"
+              value={Math.floor(cow.extraExpense / 7) }
               disabled
               fullWidth
             />

@@ -45,7 +45,7 @@ const CowDataTable = () => {
               <TableCell>Cow Weight</TableCell>
               <TableCell>Extra Expenses</TableCell>
               <TableCell>Weight Per Person</TableCell>
-              <TableCell>Purchased DateX</TableCell>
+              <TableCell>Purchased Date</TableCell>
               <TableCell></TableCell>
             </TableRow>
           </TableHead>

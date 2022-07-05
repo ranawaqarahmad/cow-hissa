@@ -25,17 +25,19 @@ const CowDetailForm = () => {
    
 
     await addDoc(usersCollectionRef, {
-      cowPrice: form.cowPrice,
+      cowPrice: parseInt(form.cowPrice),
       cowWeight: form.cowWeight,
       cowName: form.cowName,
       cowNumber: form.cowNumber,
-      extraExpense: form.extraExpense,
-      weightPerPerson: Math.floor(form.cowWeight / 7),
-      totalExpense: Math.floor(form.cowPrice + form.extraExpense),
+      extraExpense: parseInt(form.extraExpense),
+      weightPerPerson: parseInt(Math.floor(form.cowWeight / 7)),
+      totalExpense: parseInt(Math.floor(parseInt(form.cowPrice) + parseInt(form.extraExpense))),
       hissaCost: 17000,
       purchasedDate: form.purchasedDate,
       persons: [],
     });
+
+   
 
     setForm({
       cowPrice: "",
@@ -60,8 +62,8 @@ const CowDetailForm = () => {
     });
   };
 
-  let { cowId } = useParams();
-
+  
+  console.log({form})
   return (
     <>
       <h1>تفصیلات گائے</h1>
