@@ -1,7 +1,7 @@
 import { TextField, Button, Grid, Box, InputLabel } from "@mui/material";
 import { useState, useEffect } from "react";
 import { db } from "../utils/firebase";
-import { addDoc, collection, doc, getDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, setDoc } from "firebase/firestore";
 import CowDataTable from "./CowDataTable";
 import { useParams } from "react-router-dom";
 
@@ -23,8 +23,7 @@ const CowDetailForm = () => {
 
   const createData = async () => {
    
-
-    await addDoc(usersCollectionRef, {
+    await setDoc(doc(db, "cows" , form.cowNumber) , {
       cowPrice: parseInt(form.cowPrice),
       cowWeight: form.cowWeight,
       cowName: form.cowName,
@@ -35,7 +34,19 @@ const CowDetailForm = () => {
       hissaCost: 17000,
       purchasedDate: form.purchasedDate,
       persons: [],
-    });
+    })
+    // await addDoc(usersCollectionRef, {
+    //   cowPrice: parseInt(form.cowPrice),
+    //   cowWeight: form.cowWeight,
+    //   cowName: form.cowName,
+    //   cowNumber: form.cowNumber,
+    //   extraExpense: parseInt(form.extraExpense),
+    //   weightPerPerson: parseInt(Math.floor(form.cowWeight / 7)),
+    //   totalExpense: parseInt(Math.floor(parseInt(form.cowPrice) + parseInt(form.extraExpense))),
+    //   hissaCost: 17000,
+    //   purchasedDate: form.purchasedDate,
+    //   persons: [],
+    // });
 
    
 
@@ -63,7 +74,7 @@ const CowDetailForm = () => {
   };
 
   
-  console.log({form})
+
   return (
     <>
       <h1>تفصیلات گائے</h1>

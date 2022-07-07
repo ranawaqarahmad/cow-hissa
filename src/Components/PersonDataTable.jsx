@@ -6,13 +6,17 @@ import {
   TableCell,
   TableRow,
   IconButton,
+  Button,
 } from "@mui/material";
 import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { db } from "../utils/firebase";
 import { Delete as DeleteIcon } from "@mui/icons-material";
 
-const PersonDataTable = () => {
+import { useNavigate } from "react-router-dom";
+
+const PersonDataTable = ({cow}) => {
+  const navigate = useNavigate();
   const [persons, setPersons] = useState([]);
 
   const getData = async () => {
@@ -21,14 +25,10 @@ const PersonDataTable = () => {
     setPersons(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
 
-  const handleDelete = async (id) => {
-    await deleteDoc(doc(db, "persons", id));
-  };
 
   useEffect(() => {
-    getData();
+    getData();  
   }, [persons]);
-
   return (
     <>
       {/* <h1>تفصیلات فی کس</h1> */}
@@ -43,6 +43,7 @@ const PersonDataTable = () => {
               <TableCell>Advance Paid</TableCell>
               <TableCell>Remaining Payment</TableCell>
               <TableCell>No. of Hissa's</TableCell>
+              <TableCell></TableCell>
               <TableCell></TableCell>
             </TableRow>
           </TableHead>
@@ -60,6 +61,7 @@ const PersonDataTable = () => {
                   <TableCell> RS {person.advancePaid} </TableCell>
                   <TableCell> RS {person.remainingPayment} </TableCell>
                   <TableCell> {person.noOfHissa} </TableCell>
+                  <TableCell> <Button variant="contained" onClick={() => navigate(`/print-details/${person.id}`)}>Print</Button>  </TableCell>
                   <TableCell>
                     {" "}
                     <IconButton

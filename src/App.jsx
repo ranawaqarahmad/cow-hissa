@@ -4,6 +4,7 @@ import "./App.css";
 import CowDetailForm from "./Components/CowDetailForm";
 import {Container, Box} from '@mui/material'
 import PersonDetailForm from "./Components/PersonDetailForm";
+import PrintDetails from "./Components/PrintDetails";
 function App() {
   const [count, setCount] = useState(0);
 
@@ -18,7 +19,7 @@ function App() {
       <Routes>
         <Route path="/" element={<CowDetailForm />} />
         <Route path="/personDetail" exact element={<PersonDetailForm />} />
-        {/* <Route path="/cowDetails/:cowId" element={<CowDetailForm />} /> */}
+        <Route path="/print-details/:personId" element={<PrintDetails />} />
       </Routes>
     </div>
     </Container>

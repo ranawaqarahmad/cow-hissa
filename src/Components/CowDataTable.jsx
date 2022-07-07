@@ -43,6 +43,7 @@ const CowDataTable = () => {
               <TableCell>Serial No</TableCell>
               <TableCell>Cow Price</TableCell>
               <TableCell>Cow Weight</TableCell>
+              <TableCell>Cow Number</TableCell>
               <TableCell>Extra Expenses</TableCell>
               <TableCell>Weight Per Person</TableCell>
               <TableCell>Purchased Date</TableCell>
@@ -59,6 +60,7 @@ const CowDataTable = () => {
                   <TableCell> {idx + 1} </TableCell>
                   <TableCell> RS {data.cowPrice} </TableCell>
                   <TableCell> {data.cowWeight} KG </TableCell>
+                  <TableCell> {data.cowNumber} </TableCell>
                   <TableCell> RS {data.extraExpense} </TableCell>
                   <TableCell> {data.weightPerPerson} KG </TableCell>
                   <TableCell> {data.purchasedDate} </TableCell>

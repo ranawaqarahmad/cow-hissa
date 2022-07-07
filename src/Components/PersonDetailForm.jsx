@@ -18,9 +18,11 @@ import {
   updateDoc,
   arrayUnion,
   getDoc,
+  setDoc,
 } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import PersonDataTable from "./PersonDataTable";
+import PrintDetails from "./PrintDetails";
 
 const PersonDetailForm = () => {
   const navigate = useNavigate();
@@ -29,6 +31,7 @@ const PersonDetailForm = () => {
   const personsCollectionRef = collection(db, "persons");
   const cowsCollectionRef = collection(db, "cows");
   const [cow, setCow] = useState("");
+  const [cowId, setCowId] = useState("");
   const [form, setForm] = useState({
     personName: "",
     phoneNumber: "",
@@ -47,15 +50,13 @@ const PersonDetailForm = () => {
   };
 
   const createData = async () => {
+
     await addDoc(personsCollectionRef, {
       personName: form.personName,
       phoneNumber: form.phoneNumber,
       cowNumber: form.cowNumber,
       advancePaid: form.advancePaid,
-      remainingPayment: Math.floor(
-        17000 * form.noOfHissa -
-          form.advancePaid +
-          (cow.extraExpense / 7)),
+      remainingPayment:form.remainingPayment,
       noOfHissa: form.noOfHissa,
     });
 
@@ -66,7 +67,7 @@ const PersonDetailForm = () => {
 
     // navigate(`/cowDetails/${form.cowNumber}`)
 
-    console.log({form})
+
 
     setForm({
       personName: "",
@@ -76,11 +77,14 @@ const PersonDetailForm = () => {
       remainingPayment: "",
       noOfHissa: "",
     });
+   
   };
 
   const getCow = async () => {
     const cowDoc = doc(db, "cows", form.cowNumber);
     const cowDetail = await getDoc(cowDoc);
+    setCowId(cowDetail.id)
+    console.log(cowDetail.id)
     setCow(cowDetail.data());
   };
 
@@ -92,7 +96,7 @@ const PersonDetailForm = () => {
     getCow();
     getCows();
   }, [form.cowNumber]);
-
+ 
   return (
     <>
       <h1>تفصیلات فی کس</h1>
@@ -152,11 +156,12 @@ const PersonDetailForm = () => {
               onChange={(e) => handleChange(e, "cowNumber")}
               fullWidth
             >
-              {cows.map((cow, idx) => {
+              {cows.map((cow) => {
+                
                 return (
                   <MenuItem value={cow.id} key={cow.id}>
                     {" "}
-                      ( {cow.cowNumber} )
+                      ( {cow.id} )
                   </MenuItem>
                 );
               })}
@@ -196,12 +201,8 @@ const PersonDetailForm = () => {
             <TextField
               variant="outlined"
               type="number"
-              value={Math.floor(
-                17000 * form.noOfHissa -
-                  form.advancePaid +
-                  (cow.extraExpense / 7)
-              )}
-              disabled
+              value={form.remainingPayment}
+              onChange={(e) => handleChange(e, "remainingPayment")}
               fullWidth
             />
           </Grid>
@@ -268,7 +269,7 @@ const PersonDetailForm = () => {
               fullWidth
             />
           </Grid>
-          <Grid item md={4}>
+          {/* <Grid item md={4}>
             <InputLabel
               sx={{
                 fontSize: "20px",
@@ -286,7 +287,7 @@ const PersonDetailForm = () => {
               disabled
               fullWidth
             />
-          </Grid>
+          </Grid> */}
         </Grid>
 
         <Grid container item spacing={3}>
@@ -296,10 +297,13 @@ const PersonDetailForm = () => {
               Add Person{" "}
             </Button>
           </Grid>
+         
         </Grid>
       </Grid>
+
       <Box sx={{ margin: "50px 0" }}>
-        <PersonDataTable />
+     
+        <PersonDataTable  />
       </Box>
     </>
   );
