@@ -38,7 +38,7 @@ const PersonDetailForm = () => {
     cowNumber: "",
     advancePaid: "",
     pendingPayment: "",
-    payablePayment: "",
+    payablePayment: 0 ,
     noOfHissa: "1",
   });
 
@@ -56,9 +56,9 @@ const PersonDetailForm = () => {
       personName: form.personName,
       phoneNumber: form.phoneNumber,
       cowNumber: form.cowNumber,
-      advancePaid: form.advancePaid,
-      pendingPayment: Math.floor((17000 * form.noOfHissa) + (cow.extraExpense / 7)),
-      payablePayment:Math.floor((17000 * form.noOfHissa) + (cow.extraExpense / 7) - (form.advancePaid)),
+      advancePaid: parseInt(form.advancePaid),
+      pendingPayment: parseInt(Math.floor((17000 * form.noOfHissa) + (cow.extraExpense / 7) - (form.advancePaid))),
+      payablePayment: parseInt(form.payablePayment),
       noOfHissa: form.noOfHissa,
     });
 
@@ -76,7 +76,7 @@ const PersonDetailForm = () => {
       phoneNumber: "",
       cowNumber: "",
       advancePaid: "",
-      payablePayment: "",
+      payablePayment: 0,
       noOfHissa: "",
     });
  
@@ -203,8 +203,8 @@ const PersonDetailForm = () => {
             <TextField
               variant="outlined"
               type="number"
-              value={Math.floor((17000 * form.noOfHissa) + (cow.extraExpense / 7) - (form.advancePaid))}
-              disabled
+              value={form.payablePayment}
+              
               onChange={(e) => handleChange(e, "payablePayment")}
               fullWidth
             />
@@ -223,7 +223,7 @@ const PersonDetailForm = () => {
             <TextField
               variant="outlined"
               type="number"
-              value={Math.floor((17000 * form.noOfHissa) + (cow.extraExpense / 7))}
+              value={Math.floor((17000 * form.noOfHissa) + (cow.extraExpense / 7) - (form.advancePaid))}
               disabled
               onChange={(e) => handleChange(e, "pendingPayment")}
               fullWidth

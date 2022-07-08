@@ -71,7 +71,8 @@ const PersonDataTable = ({cow}) => {
                       onClick={async () => {
                         toast.error("Deleted")
                         await deleteDoc(doc(db, "persons", person.id));
-                        
+                        const newPersons = persons.filter((per) => per.id !== person.id)
+                        setPersons(newPersons)
                       //  navigate("/personDetail")
                       }}
                     >
