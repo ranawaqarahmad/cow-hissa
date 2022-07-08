@@ -69,6 +69,7 @@ const CowDataTable = () => {
                     <IconButton
                       onClick={async () => {
                         await deleteDoc(doc(db, "cows", data.id));
+                        window.location.reload(true);
                       }}
                     >
                       <DeleteIcon sx={{ color: "red" }} />
