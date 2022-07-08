@@ -28,7 +28,7 @@ const PersonDataTable = ({cow}) => {
 
   useEffect(() => {
     getData();  
-  }, [persons]);
+  }, []);
   return (
     <>
       {/* <h1>تفصیلات فی کس</h1> */}

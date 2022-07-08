@@ -79,7 +79,7 @@ const PersonDetailForm = () => {
       payablePayment: "",
       noOfHissa: "",
     });
-   
+    window.location.reload(true);
   };
 
   const getCow = async () => {

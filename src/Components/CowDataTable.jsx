@@ -31,7 +31,7 @@ const CowDataTable = () => {
   useEffect(() => {
     getCow();
     getData();
-  }, [dataArray]);
+  }, []);
 
   return (
     <>

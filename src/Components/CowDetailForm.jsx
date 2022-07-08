@@ -60,6 +60,7 @@ const CowDetailForm = () => {
       weightPerPerson: "",
     totalExpense: "",
     });
+    window.location.reload(true);
   };
 
   const handleChange = (e, key) => {
