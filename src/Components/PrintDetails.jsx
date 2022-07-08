@@ -46,16 +46,13 @@ const PrintDetails = () => {
   };
 
   function printTable(divID) {
-    //Get the HTML of div
     var divElements = document.getElementById(divID).innerHTML;
-    //Get the HTML of whole page
     var oldPage = document.body.innerHTML;
-    //Reset the page's HTML with div's HTML only
     document.body.innerHTML =
       "<html><head><title></title></head><body>" + divElements + "</body>";
-    //Print Page
+
     window.print();
-    //Restore orignal HTML
+ 
     document.body.innerHTML = oldPage;
   }
 
@@ -63,8 +60,7 @@ const PrintDetails = () => {
     getPerson();
     // getCow();
   }, [person.cowNumber]);
-  console.log("person id", person);
-  console.log("cow", cow);
+
   return (
     <>
       <div id="printableTable">
@@ -74,7 +70,7 @@ const PrintDetails = () => {
             <TableRow >
               <TableCell className={classes.tableCell}>
                 {" "}
-                :ایڈوانس فی کس
+               {person.advancePaid} :ایڈوانس فی کس
               </TableCell>
               <TableCell className={classes.tableCell}>
                 {" "}
@@ -88,7 +84,7 @@ const PrintDetails = () => {
             <TableRow>
               <TableCell className={classes.tableCell}>
                 {" "}
-                {person.advancePaid} :بقايا جات واجب الوصول
+                {person.pendingPayment} :بقايا جات واجب الوصول
               </TableCell>
               <TableCell className={classes.tableCell}>
                 {" "}
@@ -102,7 +98,7 @@ const PrintDetails = () => {
             <TableRow>
               <TableCell className={classes.tableCell}>
                 {" "}
-                {person.remainingPayment} :بقایا جات واجب الاداء
+                {person.payablePayment} :بقایا جات واجب الاداء
               </TableCell>
               <TableCell className={classes.tableCell}>
                 {" "}

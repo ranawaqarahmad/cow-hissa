@@ -37,7 +37,8 @@ const PersonDetailForm = () => {
     phoneNumber: "",
     cowNumber: "",
     advancePaid: "",
-    remainingPayment: "",
+    pendingPayment: "",
+    payablePayment: "",
     noOfHissa: "1",
   });
 
@@ -56,7 +57,8 @@ const PersonDetailForm = () => {
       phoneNumber: form.phoneNumber,
       cowNumber: form.cowNumber,
       advancePaid: form.advancePaid,
-      remainingPayment:form.remainingPayment,
+      pendingPayment: Math.floor((17000 * form.noOfHissa) + (cow.extraExpense / 7)),
+      payablePayment:Math.floor((17000 * form.noOfHissa) + (cow.extraExpense / 7) - (form.advancePaid)),
       noOfHissa: form.noOfHissa,
     });
 
@@ -74,7 +76,7 @@ const PersonDetailForm = () => {
       phoneNumber: "",
       cowNumber: "",
       advancePaid: "",
-      remainingPayment: "",
+      payablePayment: "",
       noOfHissa: "",
     });
    
@@ -84,7 +86,7 @@ const PersonDetailForm = () => {
     const cowDoc = doc(db, "cows", form.cowNumber);
     const cowDetail = await getDoc(cowDoc);
     setCowId(cowDetail.id)
-    console.log(cowDetail.id)
+    
     setCow(cowDetail.data());
   };
 
@@ -177,7 +179,7 @@ const PersonDetailForm = () => {
                 textAlign: "left",
               }}
             >
-              بقايا جات واجب الوصول
+             :ایڈوانس فی کس
             </InputLabel>
             <TextField
               variant="outlined"
@@ -201,8 +203,29 @@ const PersonDetailForm = () => {
             <TextField
               variant="outlined"
               type="number"
-              value={form.remainingPayment}
-              onChange={(e) => handleChange(e, "remainingPayment")}
+              value={Math.floor((17000 * form.noOfHissa) + (cow.extraExpense / 7) - (form.advancePaid))}
+              disabled
+              onChange={(e) => handleChange(e, "payablePayment")}
+              fullWidth
+            />
+          </Grid>
+          <Grid item md={4}>
+            <InputLabel
+              sx={{
+                fontSize: "20px",
+                fontWeight: "600",
+                margin: "10px 0",
+                textAlign: "left",
+              }}
+            >
+              بقايا جات واجب الوصول
+            </InputLabel>
+            <TextField
+              variant="outlined"
+              type="number"
+              value={Math.floor((17000 * form.noOfHissa) + (cow.extraExpense / 7))}
+              disabled
+              onChange={(e) => handleChange(e, "pendingPayment")}
               fullWidth
             />
           </Grid>
