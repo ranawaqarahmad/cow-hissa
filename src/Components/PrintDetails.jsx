@@ -10,6 +10,8 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../utils/firebase";
 import { makeStyles } from "@mui/styles";
+import UpperImg from "../../src/assets/images/upper-img.jpg";
+import BottomImg from "../../src/assets/images/bottom-img.jpg";
 
 const useStyles = makeStyles({
   tableCell: {
@@ -64,7 +66,7 @@ const PrintDetails = () => {
   return (
     <>
       <div id="printableTable">
-        <img src="../src/assets/images/upper-img.jpg" alt="img" />
+        <img src={UpperImg} alt="img" />
         <TableContainer sx={{ width: "80%", margin: "10px auto" }} className={classes.border}>
           <Table >
             <TableRow >
@@ -119,7 +121,7 @@ const PrintDetails = () => {
             </TableRow>
           </Table>
         </TableContainer>
-        <img src="../src/assets/images/bottom-img.jpg" alt="img" />
+        <img src={BottomImg} alt="img" />
       </div>
       <Button variant="contained" onClick={() => printTable("printableTable")} sx={{margin:"50px"}}>
         Print
