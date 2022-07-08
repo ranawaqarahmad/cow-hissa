@@ -70,7 +70,7 @@ const PersonDataTable = ({cow}) => {
                     <IconButton
                       onClick={async () => {
                         await deleteDoc(doc(db, "persons", person.id));
-                       navigate("/personDetail")
+                      //  navigate("/personDetail")
                       }}
                     >
                       <DeleteIcon sx={{color: 'red'}} />

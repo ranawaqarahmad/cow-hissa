@@ -50,7 +50,7 @@ const CowDetailForm = () => {
     // });
 
    
-navigate("/cowDetailTable")
+// navigate("/cowDetailTable")
     setForm({
       cowPrice: "",
       cowWeight: "",

@@ -67,7 +67,7 @@ const PersonDetailForm = () => {
       persons: arrayUnion(form.personName),
     });
 
-    navigate(`/personDetailTable`)
+    // navigate(`/personDetailTable`)
 
 
 
