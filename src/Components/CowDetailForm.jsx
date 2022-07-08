@@ -3,9 +3,10 @@ import { useState, useEffect } from "react";
 import { db } from "../utils/firebase";
 import { addDoc, collection, doc, getDoc, setDoc } from "firebase/firestore";
 import CowDataTable from "./CowDataTable";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const CowDetailForm = () => {
+  const navigate = useNavigate()
   const [form, setForm] = useState({
     cowPrice: "",
     cowWeight: "",
@@ -49,7 +50,7 @@ const CowDetailForm = () => {
     // });
 
    
-
+navigate("/cowDetailTable")
     setForm({
       cowPrice: "",
       cowWeight: "",
@@ -218,9 +219,9 @@ const CowDetailForm = () => {
         </Grid>
       </Grid>
 
-      <Box sx={{margin:"50px 0"}}>
+      {/* <Box sx={{margin:"50px 0"}}>
         <CowDataTable />
-      </Box>
+      </Box> */}
     </>
   );
 };

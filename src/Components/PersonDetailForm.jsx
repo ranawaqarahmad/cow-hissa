@@ -67,7 +67,7 @@ const PersonDetailForm = () => {
       persons: arrayUnion(form.personName),
     });
 
-    // navigate(`/cowDetails/${form.cowNumber}`)
+    navigate(`/personDetailTable`)
 
 
 
@@ -79,7 +79,7 @@ const PersonDetailForm = () => {
       payablePayment: "",
       noOfHissa: "",
     });
-    window.location.reload(true);
+ 
   };
 
   const getCow = async () => {
@@ -324,10 +324,10 @@ const PersonDetailForm = () => {
         </Grid>
       </Grid>
 
-      <Box sx={{ margin: "50px 0" }}>
+      {/* <Box sx={{ margin: "50px 0" }}>
      
         <PersonDataTable  />
-      </Box>
+      </Box> */}
     </>
   );
 };

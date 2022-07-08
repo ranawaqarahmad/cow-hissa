@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 
 const PersonDataTable = ({cow}) => {
   const navigate = useNavigate();
+  // const [persons, setPersons] = useState([]);
   const [persons, setPersons] = useState([]);
 
   const getData = async () => {
@@ -31,7 +32,7 @@ const PersonDataTable = ({cow}) => {
   }, []);
   return (
     <>
-      {/* <h1>تفصیلات فی کس</h1> */}
+      <h1>تفصیلات فی کس</h1>
       <TableContainer>
         <Table>
           <TableHead>
@@ -69,7 +70,7 @@ const PersonDataTable = ({cow}) => {
                     <IconButton
                       onClick={async () => {
                         await deleteDoc(doc(db, "persons", person.id));
-                        window.location.reload(true);
+                       window.location.reload(true)
                       }}
                     >
                       <DeleteIcon sx={{color: 'red'}} />
