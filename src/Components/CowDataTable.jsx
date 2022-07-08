@@ -10,9 +10,11 @@ import {
 } from "@mui/material";
 import { collection, getDocs, doc, deleteDoc } from "firebase/firestore";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { db } from "../utils/firebase";
 
 const CowDataTable = () => {
+  const navigate = useNavigate();
   const [dataArray, setDataArray] = useState([]);
   const [persons, setPersons] = useState([]);
 
@@ -22,11 +24,11 @@ const CowDataTable = () => {
 
     setDataArray(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
-  const getCow = async () => {
-    const personsCollectionRef = collection(db, "persons");
-    const data = await getDocs(personsCollectionRef);
-    setPersons(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-  };
+  // const getCow = async () => {
+  //   const personsCollectionRef = collection(db, "persons");
+  //   const data = await getDocs(personsCollectionRef);
+  //   setPersons(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  // };
 
   useEffect(() => {
     getCow();
@@ -69,7 +71,7 @@ const CowDataTable = () => {
                     <IconButton
                       onClick={async () => {
                         await deleteDoc(doc(db, "cows", data.id));
-                        window.location.reload(true);
+                        navigate("/cowDetail")
                       }}
                     >
                       <DeleteIcon sx={{ color: "red" }} />
