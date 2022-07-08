@@ -7,10 +7,16 @@ import PersonDetailForm from "./Components/PersonDetailForm";
 import PrintDetails from "./Components/PrintDetails";
 import PersonDataTable from "./Components/PersonDataTable";
 import CowDataTable from "./Components/CowDataTable";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   const [count, setCount] = useState(0);
 
   return (
+<>
+
+
+      <ToastContainer />
     <Container>
     <div className="App">
       <Box sx={{padding:'30px 50px' , backgroundColor: '#e8e8e8' , display: 'flex' , width: '80%' , margin: 'auto' , justifyContent: 'space-evenly' }}>
@@ -29,6 +35,7 @@ function App() {
       </Routes>
     </div>
     </Container>
+</>
   );
 }
 

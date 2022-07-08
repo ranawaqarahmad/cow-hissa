@@ -23,7 +23,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import PersonDataTable from "./PersonDataTable";
 import PrintDetails from "./PrintDetails";
-
+import {toast} from "react-toastify"
 const PersonDetailForm = () => {
   const navigate = useNavigate();
   const [cows, setCows] = useState([]);
@@ -51,7 +51,7 @@ const PersonDetailForm = () => {
   };
 
   const createData = async () => {
-
+    toast.success("Data Created")
     await addDoc(personsCollectionRef, {
       personName: form.personName,
       phoneNumber: form.phoneNumber,
@@ -66,7 +66,7 @@ const PersonDetailForm = () => {
     await updateDoc(cowDoc, {
       persons: arrayUnion(form.personName),
     });
-
+  
     // navigate(`/personDetailTable`)
 
 

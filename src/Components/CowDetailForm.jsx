@@ -4,7 +4,8 @@ import { db } from "../utils/firebase";
 import { addDoc, collection, doc, getDoc, setDoc } from "firebase/firestore";
 import CowDataTable from "./CowDataTable";
 import { useNavigate, useParams } from "react-router-dom";
-
+import {toast} from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 const CowDetailForm = () => {
   const navigate = useNavigate()
   const [form, setForm] = useState({
@@ -23,7 +24,7 @@ const CowDetailForm = () => {
   const usersCollectionRef = collection(db, "cows");
 
   const createData = async () => {
-   
+    toast.success("Data Created")
     await setDoc(doc(db, "cows" , form.cowNumber) , {
       cowPrice: parseInt(form.cowPrice),
       cowWeight: form.cowWeight,
@@ -51,6 +52,7 @@ const CowDetailForm = () => {
 
    
 // navigate("/cowDetailTable")
+
     setForm({
       cowPrice: "",
       cowWeight: "",

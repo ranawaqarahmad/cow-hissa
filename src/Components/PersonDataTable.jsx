@@ -12,7 +12,7 @@ import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { db } from "../utils/firebase";
 import { Delete as DeleteIcon } from "@mui/icons-material";
-
+import {toast} from "react-toastify"
 import { useNavigate } from "react-router-dom";
 
 const PersonDataTable = ({cow}) => {
@@ -69,7 +69,9 @@ const PersonDataTable = ({cow}) => {
                     {" "}
                     <IconButton
                       onClick={async () => {
+                        toast.error("Deleted")
                         await deleteDoc(doc(db, "persons", person.id));
+                        
                       //  navigate("/personDetail")
                       }}
                     >

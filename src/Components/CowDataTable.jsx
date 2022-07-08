@@ -12,7 +12,7 @@ import { collection, getDocs, doc, deleteDoc } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { db } from "../utils/firebase";
-
+import {toast} from "react-toastify"
 const CowDataTable = () => {
   const navigate = useNavigate();
   const [dataArray, setDataArray] = useState([]);
@@ -70,7 +70,9 @@ const CowDataTable = () => {
                     {" "}
                     <IconButton
                       onClick={async () => {
+                        toast.error("Deleted")
                         await deleteDoc(doc(db, "cows", data.id));
+                     
                         // navigate("/")
                       }}
                     >
