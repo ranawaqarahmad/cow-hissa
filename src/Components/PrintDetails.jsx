@@ -66,7 +66,14 @@ const PrintDetails = () => {
   return (
     <>
       <div id="printableTable">
+        <div className="img-hcn" style={{position: "relative"}}>
         <img src={UpperImg} alt="img" />
+       <div className="overlay" style={{position: "absolute",
+    top: "46%",
+    left: "46%",
+    fontSize: "25px",
+    fontWeight: "700"}}>{person.personName}</div>
+        </div>
         <TableContainer sx={{ width: "80%", margin: "10px auto" }} className={classes.border}>
           <Table >
             <TableRow >
@@ -80,13 +87,17 @@ const PrintDetails = () => {
               </TableCell>
               <TableCell className={classes.tableCell}>
                 {" "}
-                {Math.floor(cow.extraExpense / 7)} :اضافی اخراجات فی کس{" "}
+                {Math.floor(cow.extraExpense)} :اضافی اخراجات فی کس{" "}
               </TableCell>
             </TableRow>
             <TableRow>
               <TableCell className={classes.tableCell}>
                 {" "}
-                {person.pendingPayment} :بقايا جات واجب الوصول
+                {Math.floor(
+                cow.cowPrice / 7 + cow.extraExpense - person.advancePaid
+              ) < 0 ? 0 : Math.floor(
+                cow.cowPrice / 7 + cow.extraExpense - person.advancePaid
+              ) } :بقايا جات واجب الوصول
               </TableCell>
               <TableCell className={classes.tableCell}>
                 {" "}
@@ -94,13 +105,17 @@ const PrintDetails = () => {
               </TableCell>
               <TableCell className={classes.tableCell}>
                 {" "}
-                {Math.floor(cow.totalExpense / 7)} :کل خرچہ فی کس
+                {Math.floor((cow.cowPrice / 7) + cow.extraExpense )} :کل خرچہ فی کس
               </TableCell>
             </TableRow>
             <TableRow>
               <TableCell className={classes.tableCell}>
                 {" "}
-                {person.payablePayment} :بقایا جات واجب الاداء
+                {Math.floor(
+                person.advancePaid - (cow.cowPrice / 7 + cow.extraExpense)
+              ) < 0 ? 0 : Math.floor(
+                person.advancePaid - (cow.cowPrice / 7 + cow.extraExpense)
+              )} :بقایا جات واجب الاداء
               </TableCell>
               <TableCell className={classes.tableCell}>
                 {" "}

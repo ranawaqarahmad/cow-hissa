@@ -23,7 +23,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import PersonDataTable from "./PersonDataTable";
 import PrintDetails from "./PrintDetails";
-import {toast} from "react-toastify"
+import { toast } from "react-toastify";
 const PersonDetailForm = () => {
   const navigate = useNavigate();
   const [cows, setCows] = useState([]);
@@ -38,7 +38,7 @@ const PersonDetailForm = () => {
     cowNumber: "",
     advancePaid: "",
     pendingPayment: "",
-    payablePayment: 0 ,
+    payablePayment: 0,
     noOfHissa: "1",
   });
 
@@ -51,13 +51,17 @@ const PersonDetailForm = () => {
   };
 
   const createData = async () => {
-    toast.success("Data Created")
+    toast.success("Data Created");
     await addDoc(personsCollectionRef, {
       personName: form.personName,
       phoneNumber: form.phoneNumber,
       cowNumber: form.cowNumber,
       advancePaid: parseInt(form.advancePaid),
-      pendingPayment: parseInt(Math.floor((17000 * form.noOfHissa) + (cow.extraExpense / 7) - (form.advancePaid))),
+      pendingPayment: parseInt(
+        Math.floor(
+          17000 * form.noOfHissa + cow.extraExpense / 7 - form.advancePaid
+        )
+      ),
       payablePayment: parseInt(form.payablePayment),
       noOfHissa: form.noOfHissa,
     });
@@ -66,10 +70,8 @@ const PersonDetailForm = () => {
     await updateDoc(cowDoc, {
       persons: arrayUnion(form.personName),
     });
-  
+
     // navigate(`/personDetailTable`)
-
-
 
     setForm({
       personName: "",
@@ -79,14 +81,13 @@ const PersonDetailForm = () => {
       payablePayment: 0,
       noOfHissa: "",
     });
- 
   };
 
   const getCow = async () => {
     const cowDoc = doc(db, "cows", form.cowNumber);
     const cowDetail = await getDoc(cowDoc);
-    setCowId(cowDetail.id)
-    
+    setCowId(cowDetail.id);
+
     setCow(cowDetail.data());
   };
 
@@ -98,7 +99,7 @@ const PersonDetailForm = () => {
     getCow();
     getCows();
   }, [form.cowNumber]);
- 
+
   return (
     <>
       <h1>تفصیلات فی کس</h1>
@@ -159,11 +160,10 @@ const PersonDetailForm = () => {
               fullWidth
             >
               {cows.map((cow) => {
-                
                 return (
                   <MenuItem value={cow.id} key={cow.id}>
                     {" "}
-                      ( {cow.id} )
+                    ( {cow.id} )
                   </MenuItem>
                 );
               })}
@@ -179,7 +179,7 @@ const PersonDetailForm = () => {
                 textAlign: "left",
               }}
             >
-             :ایڈوانس فی کس
+              :ایڈوانس فی کس
             </InputLabel>
             <TextField
               variant="outlined"
@@ -189,7 +189,10 @@ const PersonDetailForm = () => {
               fullWidth
             />
           </Grid>
-          <Grid item md={4}>
+          {
+            form.advancePaid >  Math.floor(
+              ((cow.cowPrice / 7) + cow.extraExpense) 
+            ) ?  <Grid item md={4}>
             <InputLabel
               sx={{
                 fontSize: "20px",
@@ -203,13 +206,13 @@ const PersonDetailForm = () => {
             <TextField
               variant="outlined"
               type="number"
-              value={form.payablePayment}
-              
+              value={Math.floor(
+                parseInt(form.advancePaid) - (cow.cowPrice / 7 + cow.extraExpense)
+              )}
               onChange={(e) => handleChange(e, "payablePayment")}
               fullWidth
             />
-          </Grid>
-          <Grid item md={4}>
+          </Grid> : <Grid item md={4}>
             <InputLabel
               sx={{
                 fontSize: "20px",
@@ -223,12 +226,18 @@ const PersonDetailForm = () => {
             <TextField
               variant="outlined"
               type="number"
-              value={Math.floor((17000 * form.noOfHissa) + (cow.extraExpense / 7) - (form.advancePaid))}
+              
+              value={Math.floor(
+                ((cow.cowPrice / 7) + cow.extraExpense) - form.advancePaid
+              )}
               disabled
               onChange={(e) => handleChange(e, "pendingPayment")}
               fullWidth
             />
           </Grid>
+          }
+          
+          
           <Grid item md={4}>
             <InputLabel
               sx={{
@@ -320,7 +329,6 @@ const PersonDetailForm = () => {
               Add Person{" "}
             </Button>
           </Grid>
-         
         </Grid>
       </Grid>
 

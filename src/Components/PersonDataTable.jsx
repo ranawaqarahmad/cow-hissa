@@ -42,8 +42,8 @@ const PersonDataTable = ({cow}) => {
               <TableCell>Phone Number</TableCell>
               <TableCell>Cow Number</TableCell>
               <TableCell>Advance Paid</TableCell>
-              <TableCell>Payable Payment</TableCell>
-              <TableCell>Pending Payment</TableCell>
+              {/* <TableCell>Payable Payment</TableCell>
+              <TableCell>Pending Payment</TableCell> */}
               <TableCell>No. of Hissa's</TableCell>
               <TableCell></TableCell>
               <TableCell></TableCell>
@@ -61,8 +61,8 @@ const PersonDataTable = ({cow}) => {
                   <TableCell> {person.phoneNumber} </TableCell>
                   <TableCell> {person.cowNumber} </TableCell>
                   <TableCell> RS {person.advancePaid} </TableCell>
-                  <TableCell> RS {person.payablePayment} </TableCell>
-                  <TableCell> RS {person.pendingPayment} </TableCell>
+                  {/* <TableCell> RS {person.payablePayment} </TableCell>
+                  <TableCell> RS {person.pendingPayment} </TableCell> */}
                   <TableCell> {person.noOfHissa} </TableCell>
                   <TableCell> <Button variant="contained" onClick={() => navigate(`/print-details/${person.id}`)}>Print</Button>  </TableCell>
                   <TableCell>
