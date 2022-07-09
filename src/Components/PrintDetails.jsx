@@ -10,7 +10,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../utils/firebase";
 import { makeStyles } from "@mui/styles";
-import UpperImg from "../../src/assets/images/upper-img.jpg";
+import UpperImg from "../../src/assets/images/image.png";
 import BottomImg from "../../src/assets/images/bottom-img.jpg";
 
 const useStyles = makeStyles({
@@ -121,7 +121,7 @@ const PrintDetails = () => {
                 {" "}
                 {cow.cowWeight} :گائے کا کل وزن
               </TableCell>
-              <TableCell className={classes.tableCell}> :کیفیت</TableCell>
+              <TableCell className={classes.tableCell}>  کیفیت : {cow.cowName} </TableCell>
             </TableRow>
             <TableRow>
               <TableCell className={classes.tableCell}>
