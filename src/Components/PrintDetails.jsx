@@ -101,11 +101,11 @@ const PrintDetails = () => {
               </TableCell>
               <TableCell className={classes.tableCell}>
                 {" "}
-                {Math.floor(cow.cowPrice / 7)} :قیمت گائے فی کس
+                {Math.floor((cow.cowPrice / 7) * person.noOfHissa)} :قیمت گائے فی کس
               </TableCell>
               <TableCell className={classes.tableCell}>
                 {" "}
-                {Math.floor((cow.cowPrice / 7) + cow.extraExpense )} :کل خرچہ فی کس
+                {Math.floor(((cow.cowPrice / 7) + cow.extraExpense) * person.noOfHissa )} :کل خرچہ فی کس
               </TableCell>
             </TableRow>
             <TableRow>
