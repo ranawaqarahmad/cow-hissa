@@ -94,9 +94,9 @@ const PrintDetails = () => {
               <TableCell className={classes.tableCell}>
                 {" "}
                 {Math.floor(
-                cow.cowPrice / 7 + cow.extraExpense - person.advancePaid
+                ((cow.cowPrice / 7 + cow.extraExpense) * person.noOfHissa) - person.advancePaid
               ) < 0 ? 0 : Math.floor(
-                cow.cowPrice / 7 + cow.extraExpense - person.advancePaid
+                ((cow.cowPrice / 7 + cow.extraExpense ) * person.noOfHissa)- person.advancePaid
               ) } :بقايا جات واجب الوصول
               </TableCell>
               <TableCell className={classes.tableCell}>
@@ -112,9 +112,9 @@ const PrintDetails = () => {
               <TableCell className={classes.tableCell}>
                 {" "}
                 {Math.floor(
-                person.advancePaid - (cow.cowPrice / 7 + cow.extraExpense)
+                person.advancePaid - ((cow.cowPrice / 7 + cow.extraExpense) * person.noOfHissa)
               ) < 0 ? 0 : Math.floor(
-                person.advancePaid - (cow.cowPrice / 7 + cow.extraExpense)
+                person.advancePaid - ((cow.cowPrice / 7 + cow.extraExpense) * person.noOfHissa)
               )} :بقایا جات واجب الاداء
               </TableCell>
               <TableCell className={classes.tableCell}>

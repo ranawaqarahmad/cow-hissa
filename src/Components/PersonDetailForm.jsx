@@ -207,7 +207,7 @@ const PersonDetailForm = () => {
               variant="outlined"
               type="number"
               value={Math.floor(
-                parseInt(form.advancePaid) - (cow.cowPrice / 7 + cow.extraExpense)
+                parseInt(form.advancePaid) - ((cow.cowPrice / 7 + cow.extraExpense) * form.noOfHissa)
               )}
               onChange={(e) => handleChange(e, "payablePayment")}
               fullWidth
