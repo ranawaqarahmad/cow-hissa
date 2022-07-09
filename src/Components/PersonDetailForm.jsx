@@ -228,7 +228,7 @@ const PersonDetailForm = () => {
               type="number"
               
               value={Math.floor(
-                ((cow.cowPrice / 7) + cow.extraExpense) - form.advancePaid
+                (((cow.cowPrice / 7) + cow.extraExpense) * form.noOfHissa) - form.advancePaid
               )}
               disabled
               onChange={(e) => handleChange(e, "pendingPayment")}
