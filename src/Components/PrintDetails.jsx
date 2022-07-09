@@ -130,7 +130,7 @@ const PrintDetails = () => {
               </TableCell>
               <TableCell className={classes.tableCell}>
                 {" "}
-                {Math.floor(cow.cowWeight / 7)} :وزن فی کس
+                {Math.floor((cow.cowWeight / 7) * person.noOfHissa)} :وزن فی کس
               </TableCell>
               <TableCell className={classes.tableCell}> :دستخط</TableCell>
             </TableRow>
