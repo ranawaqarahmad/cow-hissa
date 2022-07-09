@@ -87,7 +87,7 @@ const PrintDetails = () => {
               </TableCell>
               <TableCell className={classes.tableCell}>
                 {" "}
-                {Math.floor(cow.extraExpense)} :اضافی اخراجات فی کس{" "}
+                {Math.floor(cow.extraExpense * person.noOfHissa)} :اضافی اخراجات فی کس{" "}
               </TableCell>
             </TableRow>
             <TableRow>
