@@ -4,10 +4,10 @@ import { db } from "../utils/firebase";
 import { addDoc, collection, doc, getDoc, setDoc } from "firebase/firestore";
 import CowDataTable from "./CowDataTable";
 import { useNavigate, useParams } from "react-router-dom";
-import {toast} from "react-toastify"
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const CowDetailForm = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     cowPrice: "",
     cowWeight: "",
@@ -24,19 +24,21 @@ const CowDetailForm = () => {
   const usersCollectionRef = collection(db, "cows");
 
   const createData = async () => {
-    toast.success("Data Created")
-    await setDoc(doc(db, "cows" , form.cowNumber) , {
+    toast.success("Data Created");
+    await setDoc(doc(db, "cows", form.cowNumber), {
       cowPrice: parseInt(form.cowPrice),
       cowWeight: form.cowWeight,
       cowName: form.cowName,
       cowNumber: form.cowNumber,
       extraExpense: parseInt(form.extraExpense),
       weightPerPerson: parseInt(Math.floor(form.cowWeight / 7)),
-      totalExpense: parseInt(Math.floor(parseInt(form.cowPrice) + parseInt(form.extraExpense))),
+      totalExpense: parseInt(
+        Math.floor(parseInt(form.cowPrice) + parseInt(form.extraExpense))
+      ),
       hissaCost: 17000,
       purchasedDate: form.purchasedDate,
       persons: [],
-    })
+    });
     // await addDoc(usersCollectionRef, {
     //   cowPrice: parseInt(form.cowPrice),
     //   cowWeight: form.cowWeight,
@@ -50,8 +52,7 @@ const CowDetailForm = () => {
     //   persons: [],
     // });
 
-   
-// navigate("/cowDetailTable")
+    // navigate("/cowDetailTable")
 
     setForm({
       cowPrice: "",
@@ -61,9 +62,8 @@ const CowDetailForm = () => {
       cowNumber: "",
       extraExpence: "",
       weightPerPerson: "",
-    totalExpense: "",
+      totalExpense: "",
     });
-    
   };
 
   const handleChange = (e, key) => {
@@ -76,8 +76,6 @@ const CowDetailForm = () => {
       };
     });
   };
-
-  
 
   return (
     <>
@@ -150,7 +148,7 @@ const CowDetailForm = () => {
                 textAlign: "left",
               }}
             >
-              نام گائے
+              کیفیت
             </InputLabel>
             <TextField
               variant="outlined"
@@ -188,7 +186,7 @@ const CowDetailForm = () => {
                 textAlign: "left",
               }}
             >
-             اضافی اخراجات 
+              اضافی اخراجات
             </InputLabel>
             <TextField
               variant="outlined"
@@ -199,16 +197,44 @@ const CowDetailForm = () => {
             />
           </Grid>
           <Grid item md={4}>
-            <InputLabel sx={{fontSize: "20px", fontWeight: "600" , margin:"10px 0" , textAlign: "left"}}>
-            وزن فی کس
+            <InputLabel
+              sx={{
+                fontSize: "20px",
+                fontWeight: "600",
+                margin: "10px 0",
+                textAlign: "left",
+              }}
+            >
+              وزن فی کس
             </InputLabel>
-            <TextField variant="outlined" type="number" value={Math.floor(form.cowWeight / 7)} disabled fullWidth />
+            <TextField
+              variant="outlined"
+              type="number"
+              value={Math.floor(form.cowWeight / 7)}
+              disabled
+              fullWidth
+            />
           </Grid>
           <Grid item md={4}>
-            <InputLabel sx={{fontSize: "20px" , fontWeight: "600" , margin: "10px 0" , textAlign: "left"}}>
-            کل خرچہ
-              </InputLabel>
-              <TextField variant="outlined" type="number" value={Math.floor(parseInt(form.cowPrice) + parseInt(form.extraExpense))} disabled fullWidth />
+            <InputLabel
+              sx={{
+                fontSize: "20px",
+                fontWeight: "600",
+                margin: "10px 0",
+                textAlign: "left",
+              }}
+            >
+              کل خرچہ
+            </InputLabel>
+            <TextField
+              variant="outlined"
+              type="number"
+              value={Math.floor(
+                parseInt(form.cowPrice) + parseInt(form.extraExpense)
+              )}
+              disabled
+              fullWidth
+            />
           </Grid>
         </Grid>
 
