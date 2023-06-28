@@ -10,7 +10,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../utils/firebase";
 import { makeStyles } from "@mui/styles";
-import UpperImg from "../../src/assets/images/image.png";
+import UpperImg from "../../src/assets/images/image.jpg";
 import BottomImg from "../../src/assets/images/bottom-img.jpg";
 
 const useStyles = makeStyles({
