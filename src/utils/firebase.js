@@ -14,7 +14,14 @@ const {
   VITE_MESSAGING,
   VITE_APP_ID,
 } = import.meta.env;
-
+console.log({
+  VITE_API_KEY,
+  VITE_AUTH_DOMAIN,
+  VITE_PROJECT_ID,
+  VITE_STORAGE_BUCKET,
+  VITE_MESSAGING,
+  VITE_APP_ID,
+})
 const firebaseConfig = {
   apiKey: VITE_API_KEY,
   authDomain: VITE_AUTH_DOMAIN,
